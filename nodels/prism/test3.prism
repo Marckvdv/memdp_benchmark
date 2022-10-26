@@ -1,0 +1,13 @@
+mdp
+
+const int X;
+
+module test
+    // states
+    s: [0..3];
+
+    [a] (s=0) -> X : (s'=1) + (1-X): (s'=2);
+    [a] (s=1) -> 1 : (s'=3);
+    [a] (s=2) -> 1 : (s'=3);
+    [a] (s=3) -> 1 : (s'=3);
+endmodule

@@ -1,0 +1,153 @@
+// This file was automatically generated.
+
+mdp
+
+const int COLORS = 4;
+const int GUESSES = 8;
+const int BALLS = 3;
+const int ANSWER0; // 0<=ANSWER0<=3
+const int ANSWER1; // 0<=ANSWER1<=3
+const int ANSWER2; // 0<=ANSWER2<=3
+// 0<=ANSWER0<=3,0<=ANSWER1<=3,0<=ANSWER2<=3
+module mastermind
+	// state
+	guess : [0 .. GUESSES] init 0;
+	ball0 : [0 .. COLORS-1] init 0;
+	ball1 : [0 .. COLORS-1] init 0;
+	ball2 : [0 .. COLORS-1] init 0;
+	correct : [0 .. BALLS] init 0;
+	
+	// transitions
+	[g000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g002] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g003] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g012] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g013] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g020] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g021] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g022] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g023] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g030] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g031] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g032] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g033] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g102] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g103] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g112] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g113] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g120] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g121] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g122] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g123] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g130] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g131] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g132] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g133] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g200] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g201] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g202] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g203] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g210] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g211] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g212] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g213] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g220] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g221] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g222] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g223] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g230] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g231] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g232] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g233] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (2=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g300] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g301] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g302] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g303] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g310] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g311] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g312] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g313] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g320] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g321] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g322] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g323] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (2=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g330] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0));
+	[g331] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0));
+	[g332] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (2=ANSWER2 ? 1 : 0));
+	[g333] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (3=ANSWER0 ? 1 : 0) + (3=ANSWER1 ? 1 : 0) + (3=ANSWER2 ? 1 : 0));
+	[g000] all_correct | !has_guesses -> true;
+	[g001] all_correct | !has_guesses -> true;
+	[g002] all_correct | !has_guesses -> true;
+	[g003] all_correct | !has_guesses -> true;
+	[g010] all_correct | !has_guesses -> true;
+	[g011] all_correct | !has_guesses -> true;
+	[g012] all_correct | !has_guesses -> true;
+	[g013] all_correct | !has_guesses -> true;
+	[g020] all_correct | !has_guesses -> true;
+	[g021] all_correct | !has_guesses -> true;
+	[g022] all_correct | !has_guesses -> true;
+	[g023] all_correct | !has_guesses -> true;
+	[g030] all_correct | !has_guesses -> true;
+	[g031] all_correct | !has_guesses -> true;
+	[g032] all_correct | !has_guesses -> true;
+	[g033] all_correct | !has_guesses -> true;
+	[g100] all_correct | !has_guesses -> true;
+	[g101] all_correct | !has_guesses -> true;
+	[g102] all_correct | !has_guesses -> true;
+	[g103] all_correct | !has_guesses -> true;
+	[g110] all_correct | !has_guesses -> true;
+	[g111] all_correct | !has_guesses -> true;
+	[g112] all_correct | !has_guesses -> true;
+	[g113] all_correct | !has_guesses -> true;
+	[g120] all_correct | !has_guesses -> true;
+	[g121] all_correct | !has_guesses -> true;
+	[g122] all_correct | !has_guesses -> true;
+	[g123] all_correct | !has_guesses -> true;
+	[g130] all_correct | !has_guesses -> true;
+	[g131] all_correct | !has_guesses -> true;
+	[g132] all_correct | !has_guesses -> true;
+	[g133] all_correct | !has_guesses -> true;
+	[g200] all_correct | !has_guesses -> true;
+	[g201] all_correct | !has_guesses -> true;
+	[g202] all_correct | !has_guesses -> true;
+	[g203] all_correct | !has_guesses -> true;
+	[g210] all_correct | !has_guesses -> true;
+	[g211] all_correct | !has_guesses -> true;
+	[g212] all_correct | !has_guesses -> true;
+	[g213] all_correct | !has_guesses -> true;
+	[g220] all_correct | !has_guesses -> true;
+	[g221] all_correct | !has_guesses -> true;
+	[g222] all_correct | !has_guesses -> true;
+	[g223] all_correct | !has_guesses -> true;
+	[g230] all_correct | !has_guesses -> true;
+	[g231] all_correct | !has_guesses -> true;
+	[g232] all_correct | !has_guesses -> true;
+	[g233] all_correct | !has_guesses -> true;
+	[g300] all_correct | !has_guesses -> true;
+	[g301] all_correct | !has_guesses -> true;
+	[g302] all_correct | !has_guesses -> true;
+	[g303] all_correct | !has_guesses -> true;
+	[g310] all_correct | !has_guesses -> true;
+	[g311] all_correct | !has_guesses -> true;
+	[g312] all_correct | !has_guesses -> true;
+	[g313] all_correct | !has_guesses -> true;
+	[g320] all_correct | !has_guesses -> true;
+	[g321] all_correct | !has_guesses -> true;
+	[g322] all_correct | !has_guesses -> true;
+	[g323] all_correct | !has_guesses -> true;
+	[g330] all_correct | !has_guesses -> true;
+	[g331] all_correct | !has_guesses -> true;
+	[g332] all_correct | !has_guesses -> true;
+	[g333] all_correct | !has_guesses -> true;
+endmodule
+
+formula has_guesses = guess < GUESSES;
+formula all_correct = correct=BALLS;
+label "target" = all_correct;

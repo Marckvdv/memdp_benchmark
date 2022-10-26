@@ -1,0 +1,23 @@
+mdp
+
+const int DIM = 5;
+const int ROCKS = 4;
+
+module robot
+    x : [0..DIM-1] init 0;
+    y : [0..DIM-1] init 0;
+
+    // rock knowledge, 0 is no knowledge, -1 is bad, +1 is good.
+    rk1 : [-1..1] init 0; 
+
+    [north] true -> (ry'=min(ry+1, DIM-1));
+    [south] true -> (ry'=max(ry-1, 0));
+    [east] true -> (rx'=min(rx+1, DIM-1));
+    [west] true -> (rx'=max(ry-1, 0));
+
+    [check_1] true -> true;
+
+    // TODO check if we are on a *good rock*. If on a bad rock or no rock at all
+    // we fail.
+    [sample] true -> true; 
+endmodule

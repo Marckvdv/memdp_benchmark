@@ -1,0 +1,28 @@
+mdp
+
+const int DIM = 3;
+
+const int VARIANT;
+const int DEAD_NODE_X = mod(VARIANT, DIM);
+const int DEAD_NODE_Y = floor(VARIANT/DIM);
+
+module grid
+    x : [0..DIM-1] init 0;
+    y : [0..DIM-1] init 0;
+
+    [north] alive & !(y+1=DEAD_NODE_Y & x=DEAD_NODE_X) -> (y'=min(y+1,DIM-1));
+    [south] alive & !(y-1=DEAD_NODE_Y & x=DEAD_NODE_X) -> (y'=max(y-1,0));
+    [east]  alive & !(y=DEAD_NODE_Y & x+1=DEAD_NODE_X) -> (x'=min(x+1,DIM-1));
+    [west]  alive & !(y=DEAD_NODE_Y & x-1=DEAD_NODE_X) -> (x'=max(x-1,0)); 
+
+    [north] !(alive & !(y+1=DEAD_NODE_Y & x=DEAD_NODE_X)) -> true;
+    [south] !(alive & !(y-1=DEAD_NODE_Y & x=DEAD_NODE_X)) -> true;
+    [east]  !(alive & !(y=DEAD_NODE_Y & x+1=DEAD_NODE_X)) -> true;
+    [west]  !(alive & !(y=DEAD_NODE_Y & x-1=DEAD_NODE_X)) -> true;
+endmodule
+
+formula goalReached = x=DIM-1 & y=DIM-1;
+formula alive = (x != DEAD_NODE_X) | (y != DEAD_NODE_Y);
+
+label "target"=goalReached;
+label "remain"=true;

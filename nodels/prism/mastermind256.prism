@@ -1,0 +1,159 @@
+// This file was automatically generated.
+
+mdp
+
+const int COLORS = 2;
+const int GUESSES = 5;
+const int BALLS = 6;
+const int ANSWER0; // 0<=ANSWER0<=1
+const int ANSWER1; // 0<=ANSWER1<=1
+const int ANSWER2; // 0<=ANSWER2<=1
+const int ANSWER3; // 0<=ANSWER3<=1
+const int ANSWER4; // 0<=ANSWER4<=1
+const int ANSWER5; // 0<=ANSWER5<=1
+// 0<=ANSWER0<=1,0<=ANSWER1<=1,0<=ANSWER2<=1,0<=ANSWER3<=1,0<=ANSWER4<=1,0<=ANSWER5<=1
+module mastermind
+	// state
+	guess : [0 .. GUESSES] init 0;
+	ball0 : [0 .. COLORS-1] init 0;
+	ball1 : [0 .. COLORS-1] init 0;
+	ball2 : [0 .. COLORS-1] init 0;
+	ball3 : [0 .. COLORS-1] init 0;
+	ball4 : [0 .. COLORS-1] init 0;
+	ball5 : [0 .. COLORS-1] init 0;
+	correct : [0 .. BALLS] init 0;
+	
+	// transitions
+	[g000000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g000001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g000010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g000011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g000100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g000101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g000110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g000111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g001000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g001001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g001010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g001011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g001100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g001101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g001110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g001111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g010000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g010001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g010010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g010011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g010100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g010101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g010110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g010111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g011000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g011001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g011010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g011011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g011100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g011101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g011110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g011111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g100000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g100001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g100010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g100011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g100100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g100101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g100110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g100111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g101000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g101001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g101010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g101011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g101100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g101101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g101110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g101111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (0=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g110000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g110001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g110010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g110011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g110100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g110101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g110110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g110111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (0=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g111000] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g111001] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g111010] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g111011] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (0=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g111100] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g111101] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (0=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g111110] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (0=ANSWER5 ? 1 : 0));
+	[g111111] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (1=ANSWER0 ? 1 : 0) + (1=ANSWER1 ? 1 : 0) + (1=ANSWER2 ? 1 : 0) + (1=ANSWER3 ? 1 : 0) + (1=ANSWER4 ? 1 : 0) + (1=ANSWER5 ? 1 : 0));
+	[g000000] all_correct | !has_guesses -> true;
+	[g000001] all_correct | !has_guesses -> true;
+	[g000010] all_correct | !has_guesses -> true;
+	[g000011] all_correct | !has_guesses -> true;
+	[g000100] all_correct | !has_guesses -> true;
+	[g000101] all_correct | !has_guesses -> true;
+	[g000110] all_correct | !has_guesses -> true;
+	[g000111] all_correct | !has_guesses -> true;
+	[g001000] all_correct | !has_guesses -> true;
+	[g001001] all_correct | !has_guesses -> true;
+	[g001010] all_correct | !has_guesses -> true;
+	[g001011] all_correct | !has_guesses -> true;
+	[g001100] all_correct | !has_guesses -> true;
+	[g001101] all_correct | !has_guesses -> true;
+	[g001110] all_correct | !has_guesses -> true;
+	[g001111] all_correct | !has_guesses -> true;
+	[g010000] all_correct | !has_guesses -> true;
+	[g010001] all_correct | !has_guesses -> true;
+	[g010010] all_correct | !has_guesses -> true;
+	[g010011] all_correct | !has_guesses -> true;
+	[g010100] all_correct | !has_guesses -> true;
+	[g010101] all_correct | !has_guesses -> true;
+	[g010110] all_correct | !has_guesses -> true;
+	[g010111] all_correct | !has_guesses -> true;
+	[g011000] all_correct | !has_guesses -> true;
+	[g011001] all_correct | !has_guesses -> true;
+	[g011010] all_correct | !has_guesses -> true;
+	[g011011] all_correct | !has_guesses -> true;
+	[g011100] all_correct | !has_guesses -> true;
+	[g011101] all_correct | !has_guesses -> true;
+	[g011110] all_correct | !has_guesses -> true;
+	[g011111] all_correct | !has_guesses -> true;
+	[g100000] all_correct | !has_guesses -> true;
+	[g100001] all_correct | !has_guesses -> true;
+	[g100010] all_correct | !has_guesses -> true;
+	[g100011] all_correct | !has_guesses -> true;
+	[g100100] all_correct | !has_guesses -> true;
+	[g100101] all_correct | !has_guesses -> true;
+	[g100110] all_correct | !has_guesses -> true;
+	[g100111] all_correct | !has_guesses -> true;
+	[g101000] all_correct | !has_guesses -> true;
+	[g101001] all_correct | !has_guesses -> true;
+	[g101010] all_correct | !has_guesses -> true;
+	[g101011] all_correct | !has_guesses -> true;
+	[g101100] all_correct | !has_guesses -> true;
+	[g101101] all_correct | !has_guesses -> true;
+	[g101110] all_correct | !has_guesses -> true;
+	[g101111] all_correct | !has_guesses -> true;
+	[g110000] all_correct | !has_guesses -> true;
+	[g110001] all_correct | !has_guesses -> true;
+	[g110010] all_correct | !has_guesses -> true;
+	[g110011] all_correct | !has_guesses -> true;
+	[g110100] all_correct | !has_guesses -> true;
+	[g110101] all_correct | !has_guesses -> true;
+	[g110110] all_correct | !has_guesses -> true;
+	[g110111] all_correct | !has_guesses -> true;
+	[g111000] all_correct | !has_guesses -> true;
+	[g111001] all_correct | !has_guesses -> true;
+	[g111010] all_correct | !has_guesses -> true;
+	[g111011] all_correct | !has_guesses -> true;
+	[g111100] all_correct | !has_guesses -> true;
+	[g111101] all_correct | !has_guesses -> true;
+	[g111110] all_correct | !has_guesses -> true;
+	[g111111] all_correct | !has_guesses -> true;
+endmodule
+
+formula has_guesses = guess < GUESSES;
+formula all_correct = correct=BALLS;
+label "target" = all_correct;

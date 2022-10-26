@@ -1,0 +1,28 @@
+mdp
+
+const int PLAYERS = 2;
+const int SPACES = 64;
+const int M = SPACES-1;
+
+module board
+    turn : [0..PLAYERS-1];
+//    processing : bool init false;
+
+    [throw] true -> (turn'=(turn+1)%PLAYERS);
+//    [process] processing -> (processing'=false);
+endmodule
+
+module goose1
+    s1 : [0..M] init 0;
+    free1: bool init true;
+
+    [throw] turn=p1 & free1 -> (1/36):(s1'=min(s1+2, M)) + (2/36):(s1'=min(s1+3, M)) + (3/36):(s1'=min(s1+4, M)) + (4/36):(s1'=min(s1+5, M)) + (5/36):(s1'=min(s1+6, M)) + (6/36):(s1'=min(s1+7, M)) + (5/36):(s1'=min(s1+8, M)) + (4/36):(s1'=min(s1+9, M)) + (3/36):(s1'=min(s1+10, M)) + (2/36):(s1'=min(s1+11, M)) + (1/36):(s1'=min(s1+12, M));
+//    [processing] true -> (free1'= s1!=13);
+
+    [throw] turn!=p1 | !free1 -> true;
+endmodule
+
+formula p1=0;
+formula p2=1;
+
+module goose2 = goose1 [s1=s2, free1=free2, p1=p2] endmodule

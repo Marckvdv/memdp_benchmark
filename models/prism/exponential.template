@@ -1,0 +1,33 @@
+mdp
+
+const int N = {{n}};
+const int VARIANT; // 0 <= VARIANT <= {{n-1}}
+
+module exponential
+    stage : [0 .. 1] init 0;
+    a : bool init false;
+    a_or_b : bool init false;
+    s : [0 .. N/2] init 0;
+
+    [a] stage=0 & !a_or_b & VARIANT=s -> (a'=true) & (a_or_b'=true);
+    [a] stage=0 & !a_or_b & VARIANT=N-1-s -> (a'=false) & (a_or_b'=true);
+    [a] stage=0 & !a_or_b & s!=VARIANT & s!=N-VARIANT-1 -> 0.5:(a'=false) & (a_or_b'=true) + 0.5:(a'=true) & (a_or_b'=true);
+
+    [a] stage=0 & a_or_b & s+1 < N/2 -> (s'=s+1) & (a_or_b'=false) & (a'=false);
+    [a] stage=0 & a_or_b & s+1 >= N/2 -> (s'=0) & (a_or_b'=false) & (a'=false) & (stage'=1);
+
+    [a] stage=1 -> true;
+{% for i in range(n) %}
+    [g{{i}}] stage=0 -> true;
+    [g{{i}}] stage=1 & a_or_b -> true;
+{% endfor %}
+
+{% for i in range(n) %}
+    [g{{i}}] stage=1 & !a_or_b & VARIANT={{i}} & s < N/2 -> (a_or_b'=true) & (a'=true) & (s'=0);
+    [g{{i}}] stage=1 & !a_or_b & VARIANT!={{i}} & s < N/2 -> (s'=s+1);
+    [g{{i}}] stage=1 & !a_or_b & s >= N/2 -> (a_or_b'=true) & (a'=false);
+{% endfor %}
+
+endmodule
+
+label "target"= stage=1 & a_or_b & a;

@@ -1,0 +1,25 @@
+mdp
+
+const int VARIANT;
+
+module simple
+    s : [1 .. 4] init 1;
+
+{% for i in range(n) %}
+    [a{{i}}] s=1 -> (s'=(VARIANT={{i}} ? 1 : 2));
+{% endfor %}
+
+{% for i in range(n) %}
+    [a{{i}}] s=2 -> (s'=(VARIANT={{i}} ? 3 : 4));
+{% endfor %}
+
+    [aR] s  = 2 -> (s'=1);
+    [aR] s != 2 -> true;
+
+{% for i in range(n) %}
+    [a{{i}}] s=3 | s=4 -> true;
+{% endfor %}
+endmodule
+
+label "fail"= s=4;
+label "target"= s=3;

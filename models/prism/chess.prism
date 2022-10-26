@@ -1,0 +1,43 @@
+mdp
+
+// King vs Knight, both start on same color. King tries to reach goal without
+// being captured, but does not know where the knight is.
+
+// Problem currently is that in the state space (valuation) it is always clear
+// where the knight is. In the dragon/pit model this was resolved by making the
+// pit absorbing instead, so on the surface the state space is the same until
+// you are in the pit. If only there was a way to hide a part of the state
+// space...
+
+// Square chess board dimensions
+const int DIM = 10;
+
+const int KNIGHT_START;
+
+module king
+    x : [0..DIM-1] init 0;
+    y : [0..DIM-1] init 0;
+
+    [n] n_avail -> 1:(y'=y+1);
+    [s] s_avail -> 1:(y'=y-1);
+    [e] e_avail -> 1:(x'=x+1);
+    [w] w_avail -> 1:(x'=x-1);
+
+    [ne] n_avail & e_avail -> 1:(x'=x+1 & y'=y+1);
+    [se] s_avail & e_avail -> 1:(x'=x+1 & y'=y-1);
+    [nw] n_avail & w_avail -> 1:(x'=x-1 & y'=y+1);
+    [sw] s_avail & w_avail -> 1:(x'=x-1 & y'=y-1);
+endmodule
+
+module knight
+    x : [0..DIM-1] init KNIGHT_START;
+    y : [0..DIM-1] init KNIGHT_START;
+
+    // TODO put knight moves here, completely probabilistic, making sure the
+    // knight cannot get off the board.
+endmodule
+
+formula n_avail = y < DIM-1;
+formula s_avail = y > 0;
+formula e_avail = x < DIM-1;
+formula w_avail = x > 0;

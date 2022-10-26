@@ -1,0 +1,106 @@
+mdp
+
+const int VARIANT;
+
+module simple
+    s : [1 .. 4] init 1;
+
+    [a0] s=1 -> (s'=(VARIANT=0 ? 1 : 2));
+    [a1] s=1 -> (s'=(VARIANT=1 ? 1 : 2));
+    [a2] s=1 -> (s'=(VARIANT=2 ? 1 : 2));
+    [a3] s=1 -> (s'=(VARIANT=3 ? 1 : 2));
+    [a4] s=1 -> (s'=(VARIANT=4 ? 1 : 2));
+    [a5] s=1 -> (s'=(VARIANT=5 ? 1 : 2));
+    [a6] s=1 -> (s'=(VARIANT=6 ? 1 : 2));
+    [a7] s=1 -> (s'=(VARIANT=7 ? 1 : 2));
+    [a8] s=1 -> (s'=(VARIANT=8 ? 1 : 2));
+    [a9] s=1 -> (s'=(VARIANT=9 ? 1 : 2));
+    [a10] s=1 -> (s'=(VARIANT=10 ? 1 : 2));
+    [a11] s=1 -> (s'=(VARIANT=11 ? 1 : 2));
+    [a12] s=1 -> (s'=(VARIANT=12 ? 1 : 2));
+    [a13] s=1 -> (s'=(VARIANT=13 ? 1 : 2));
+    [a14] s=1 -> (s'=(VARIANT=14 ? 1 : 2));
+    [a15] s=1 -> (s'=(VARIANT=15 ? 1 : 2));
+    [a16] s=1 -> (s'=(VARIANT=16 ? 1 : 2));
+    [a17] s=1 -> (s'=(VARIANT=17 ? 1 : 2));
+    [a18] s=1 -> (s'=(VARIANT=18 ? 1 : 2));
+    [a19] s=1 -> (s'=(VARIANT=19 ? 1 : 2));
+    [a20] s=1 -> (s'=(VARIANT=20 ? 1 : 2));
+    [a21] s=1 -> (s'=(VARIANT=21 ? 1 : 2));
+    [a22] s=1 -> (s'=(VARIANT=22 ? 1 : 2));
+    [a23] s=1 -> (s'=(VARIANT=23 ? 1 : 2));
+    [a24] s=1 -> (s'=(VARIANT=24 ? 1 : 2));
+    [a25] s=1 -> (s'=(VARIANT=25 ? 1 : 2));
+    [a26] s=1 -> (s'=(VARIANT=26 ? 1 : 2));
+    [a27] s=1 -> (s'=(VARIANT=27 ? 1 : 2));
+    [a28] s=1 -> (s'=(VARIANT=28 ? 1 : 2));
+    [a29] s=1 -> (s'=(VARIANT=29 ? 1 : 2));
+
+    [a0] s=2 -> (s'=(VARIANT=0 ? 3 : 4));
+    [a1] s=2 -> (s'=(VARIANT=1 ? 3 : 4));
+    [a2] s=2 -> (s'=(VARIANT=2 ? 3 : 4));
+    [a3] s=2 -> (s'=(VARIANT=3 ? 3 : 4));
+    [a4] s=2 -> (s'=(VARIANT=4 ? 3 : 4));
+    [a5] s=2 -> (s'=(VARIANT=5 ? 3 : 4));
+    [a6] s=2 -> (s'=(VARIANT=6 ? 3 : 4));
+    [a7] s=2 -> (s'=(VARIANT=7 ? 3 : 4));
+    [a8] s=2 -> (s'=(VARIANT=8 ? 3 : 4));
+    [a9] s=2 -> (s'=(VARIANT=9 ? 3 : 4));
+    [a10] s=2 -> (s'=(VARIANT=10 ? 3 : 4));
+    [a11] s=2 -> (s'=(VARIANT=11 ? 3 : 4));
+    [a12] s=2 -> (s'=(VARIANT=12 ? 3 : 4));
+    [a13] s=2 -> (s'=(VARIANT=13 ? 3 : 4));
+    [a14] s=2 -> (s'=(VARIANT=14 ? 3 : 4));
+    [a15] s=2 -> (s'=(VARIANT=15 ? 3 : 4));
+    [a16] s=2 -> (s'=(VARIANT=16 ? 3 : 4));
+    [a17] s=2 -> (s'=(VARIANT=17 ? 3 : 4));
+    [a18] s=2 -> (s'=(VARIANT=18 ? 3 : 4));
+    [a19] s=2 -> (s'=(VARIANT=19 ? 3 : 4));
+    [a20] s=2 -> (s'=(VARIANT=20 ? 3 : 4));
+    [a21] s=2 -> (s'=(VARIANT=21 ? 3 : 4));
+    [a22] s=2 -> (s'=(VARIANT=22 ? 3 : 4));
+    [a23] s=2 -> (s'=(VARIANT=23 ? 3 : 4));
+    [a24] s=2 -> (s'=(VARIANT=24 ? 3 : 4));
+    [a25] s=2 -> (s'=(VARIANT=25 ? 3 : 4));
+    [a26] s=2 -> (s'=(VARIANT=26 ? 3 : 4));
+    [a27] s=2 -> (s'=(VARIANT=27 ? 3 : 4));
+    [a28] s=2 -> (s'=(VARIANT=28 ? 3 : 4));
+    [a29] s=2 -> (s'=(VARIANT=29 ? 3 : 4));
+
+    [aR] s  = 2 -> (s'=1);
+    [aR] s != 2 -> true;
+
+    [a0] s=3 | s=4 -> true;
+    [a1] s=3 | s=4 -> true;
+    [a2] s=3 | s=4 -> true;
+    [a3] s=3 | s=4 -> true;
+    [a4] s=3 | s=4 -> true;
+    [a5] s=3 | s=4 -> true;
+    [a6] s=3 | s=4 -> true;
+    [a7] s=3 | s=4 -> true;
+    [a8] s=3 | s=4 -> true;
+    [a9] s=3 | s=4 -> true;
+    [a10] s=3 | s=4 -> true;
+    [a11] s=3 | s=4 -> true;
+    [a12] s=3 | s=4 -> true;
+    [a13] s=3 | s=4 -> true;
+    [a14] s=3 | s=4 -> true;
+    [a15] s=3 | s=4 -> true;
+    [a16] s=3 | s=4 -> true;
+    [a17] s=3 | s=4 -> true;
+    [a18] s=3 | s=4 -> true;
+    [a19] s=3 | s=4 -> true;
+    [a20] s=3 | s=4 -> true;
+    [a21] s=3 | s=4 -> true;
+    [a22] s=3 | s=4 -> true;
+    [a23] s=3 | s=4 -> true;
+    [a24] s=3 | s=4 -> true;
+    [a25] s=3 | s=4 -> true;
+    [a26] s=3 | s=4 -> true;
+    [a27] s=3 | s=4 -> true;
+    [a28] s=3 | s=4 -> true;
+    [a29] s=3 | s=4 -> true;
+endmodule
+
+label "fail"= s=4;
+label "target"= s=3;

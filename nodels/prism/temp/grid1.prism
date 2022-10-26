@@ -1,0 +1,30 @@
+mdp
+
+const int DIM = 10;
+
+// Randon numbers using a simple LCG
+const int SEED;
+const int MOD = 2147483647; // 2^31-1
+const int MULT = 48271;
+
+const int RAND1 = mod(SEED*MULT, MOD);
+const int RAND2 = mod(RAND1*MULT, MOD);
+const int RAND3 = mod(RAND2*MULT, MOD);
+const int RAND4 = mod(RAND3*MULT, MOD);
+const int RAND5 = mod(RAND4*MULT, MOD);
+const int RAND6 = mod(RAND5*MULT, MOD);
+const int RAND7 = mod(RAND6*MULT, MOD);
+const int RAND8 = mod(RAND7*MULT, MOD);
+const int RAND9 = mod(RAND8*MULT, MOD);
+const int RAND10 = mod(RAND9*MULT, MOD);
+
+module grid
+    x : [1..DIM] init 1;
+    y : [1..DIM] init 1;
+
+    [north] mod(RAND1+x+y*DIM, 4) != 0 -> (y'=min(y+1,DIM)) & (x'=x);
+    [south] mod(RAND2+x+y*DIM, 4) != 0 -> (y'=max(y-1,1)) & (x'=x);
+    [east]  mod(RAND3+x+y*DIM, 4) != 0 -> (y'=y) & (x'=min(x+1,DIM));
+    [west]  mod(RAND4+x+y*DIM, 4) != 0 -> (y'=y) & (x'=max(x-1,1)); 
+
+endmodule

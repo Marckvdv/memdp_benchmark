@@ -1,0 +1,25 @@
+mdp
+
+const int VARIANT; // 0<=VARIANT<=1
+
+module unsat
+    s : [0..4] init 0;
+
+    [a] s=0 & VARIANT=0 -> (s'=1);
+    [b] s=0 & VARIANT=0 -> (s'=3);
+    [c] s=0 & VARIANT=0 -> (s'=4);
+
+    [a] s=0 & VARIANT=1 -> (s'=2);
+    [b] s=0 & VARIANT=1 -> (s'=4);
+    [c] s=0 & VARIANT=1 -> (s'=3);
+
+    [a] s=1 | s=2 -> (s'=0);
+    [b] s=1 | s=2 -> (s'=0);
+    [c] s=1 | s=2 -> (s'=0);
+
+    [a] s=3 | s=4 -> true;
+    [b] s=3 | s=4 -> true;
+    [c] s=3 | s=4 -> true;
+endmodule
+
+label "target"= s=4;

@@ -1,0 +1,39 @@
+// This file was automatically generated.
+
+mdp
+
+const int COLORS = 3;
+const int GUESSES = 4;
+const int BALLS = 2;
+const int ANSWER0; // 0<=ANSWER0<=2
+const int ANSWER1; // 0<=ANSWER1<=2
+// 0<=ANSWER0<=2,0<=ANSWER1<=2
+module mastermind
+	// state
+	guess : [0 .. GUESSES] init 0;
+	correct : [0 .. BALLS] init 0;
+	
+	// transitions
+	[g00] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=0) ? 1 : 0) + ((ANSWER1=0) ? 1 : 0)));
+	[g01] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=0) ? 1 : 0) + ((ANSWER1=1) ? 1 : 0)));
+	[g02] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=0) ? 1 : 0) + ((ANSWER1=2) ? 1 : 0)));
+	[g10] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=1) ? 1 : 0) + ((ANSWER1=0) ? 1 : 0)));
+	[g11] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=1) ? 1 : 0) + ((ANSWER1=1) ? 1 : 0)));
+	[g12] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=1) ? 1 : 0) + ((ANSWER1=2) ? 1 : 0)));
+	[g20] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=2) ? 1 : 0) + ((ANSWER1=0) ? 1 : 0)));
+	[g21] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=2) ? 1 : 0) + ((ANSWER1=1) ? 1 : 0)));
+	[g22] (has_guesses & !all_correct) -> (guess'= guess + 1) & (correct'= (0 + ((ANSWER0=2) ? 1 : 0) + ((ANSWER1=2) ? 1 : 0)));
+	[g00] (all_correct | (!has_guesses)) -> true;
+	[g01] (all_correct | (!has_guesses)) -> true;
+	[g02] (all_correct | (!has_guesses)) -> true;
+	[g10] (all_correct | (!has_guesses)) -> true;
+	[g11] (all_correct | (!has_guesses)) -> true;
+	[g12] (all_correct | (!has_guesses)) -> true;
+	[g20] (all_correct | (!has_guesses)) -> true;
+	[g21] (all_correct | (!has_guesses)) -> true;
+	[g22] (all_correct | (!has_guesses)) -> true;
+endmodule
+
+formula has_guesses = guess < GUESSES;
+formula all_correct = correct=BALLS;
+label "target" = all_correct;

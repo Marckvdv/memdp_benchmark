@@ -1,0 +1,11 @@
+mdp
+
+const int CAPACITY = 10;
+const int SPEED = 1;
+
+module buffer
+    queue: [0 .. CAPACITY] init 0;
+    alive: bool;
+
+    [wait] true -> true;
+endmodule

@@ -1,0 +1,7 @@
+mdp
+
+module robot
+  ar : [0..3] init 0;
+  [left] true -> 1: (ar'=mod(ar-1,4));
+  [right] true -> 1: (ar'=mod(ar+1,4));
+endmodule

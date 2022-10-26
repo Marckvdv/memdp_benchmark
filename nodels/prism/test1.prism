@@ -1,0 +1,10 @@
+dtmc
+
+const int X;
+
+module test
+	// local state
+	s : [0..3] init 0;
+
+    [] s=0 -> (1/X) : (s'=1) + (1-1/X) : (s'=2);
+endmodule

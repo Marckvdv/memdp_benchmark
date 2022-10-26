@@ -1,0 +1,15 @@
+mdp
+
+module client1
+    a1 : [0..1] init 1;
+    h1 : bool init false;
+    s1 : [0..1] init 0;
+
+    [a] a1=1 & s1=0 -> 0.5:(s1'=1) & (h1'=true) + 0.5:(s1'=1) & (h1'=false);
+    [a] a1=1 & s1=1 -> (s1'=0) & (a1'=(h1 ? 1 : (!(h1 | h2 | h3 | h4))?1:0));
+    [a] a1=0 -> (h1'=false) & (s1'=0);
+endmodule
+
+module client2 = client1 [ a1=a2, h1=h2, s1=s2 ] endmodule
+module client3 = client1 [ a1=a3, h1=h3, s1=s3 ] endmodule
+module client4 = client1 [ a1=a4, h1=h4, s1=s4 ] endmodule

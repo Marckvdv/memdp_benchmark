@@ -1,0 +1,28 @@
+// TODO I suspect this will only work if the target states are made absorbing:
+// if they were not absorbing there is not enough information in the game on
+// what states have been visited. Making the target states absorbing gives the
+// information that if the current state is not absorbing we are not in one of
+// the MDPs that have the current states as a target.
+
+// An interesting scenario of this would be to find the 'fastest' policy, which
+// would essentially be TSP. Fastest in this context would mean, least amount
+// of actions.
+mdp
+
+const int DIM = 3;
+
+const int VARIANT;
+const int TREASURE_NODE_X = mod(VARIANT, DIM);
+const int TREASURE_NODE_Y = floor(VARIANT/DIM);
+
+module treasure
+    x : [0..DIM-1] init 0;
+    y : [0..DIM-1] init 0;
+
+    [north] true -> (y'=min(y+1,DIM-1));
+    [south] true -> (y'=max(y-1,0));
+    [east]  true -> (x'=min(x+1,DIM-1));
+    [west]  true -> (x'=max(x-1,0)); 
+endmodule
+
+label "target"= (x=TREASURE_NODE_X) & (y=TREASURE_NODE_Y);

@@ -1,0 +1,34 @@
+mdp
+
+const int DIM = 7;
+
+const int VARIANT;
+const int AVOID_NODE_X = mod(VARIANT, DIM);
+const int AVOID_NODE_Y = floor(VARIANT/DIM);
+
+module grid
+    x : [0..DIM-1] init 0;
+    y : [0..DIM-1] init 0;
+
+    [north] !avoid -> (y'=ny);
+    [south] !avoid -> (y'=sy);
+    [east]  !avoid -> (x'=ex);
+    [west]  !avoid -> (x'=wx);
+
+    [north] avoid -> true;
+    [south] avoid -> true;
+    [east]  avoid -> true;
+    [west]  avoid -> true;
+endmodule
+
+formula avoid = x=AVOID_NODE_X & y=AVOID_NODE_Y;
+formula danger = pow(x-AVOID_NODE_X,2) + pow(y-AVOID_NODE_Y,2) <= 2;
+
+formula ny=min(y+1,DIM-1);
+formula sy=max(y-1,0);
+formula ex=min(x+1,DIM-1);
+formula wx=max(x-1,0);
+
+label "avoid"=avoid;
+label "danger"=danger;
+label "target"=x=DIM-1 & y=DIM-1;

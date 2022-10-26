@@ -1,0 +1,17 @@
+mdp
+
+const int DIM = 5;
+
+module a
+sa : [0..DIM];
+[] sa > 0 & sa < DIM -> 0.5:(sa'=sa-1) + 0.5:(sa'=sa+1);
+[] sa = 0 -> 1:(sa'=1);
+[] sa = DIM -> 1:(sa'=DIM-1);
+endmodule
+
+module b
+sb : [0..DIM];
+[] sb > 0 & sb < DIM -> 0.5:(sb'=sb-1) + 0.5:(sb'=sb+1);
+[] sb = 0 -> 1:(sb'=1);
+[] sb = DIM -> 1:(sb'=DIM-1);
+endmodule
