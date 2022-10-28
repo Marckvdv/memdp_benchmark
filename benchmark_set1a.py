@@ -4,7 +4,7 @@ import os
 
 STORM_BIN_PATH = Path('storm-multimdp')
 RESULTS_PATH = Path('results')
-MODELS_PATH = Path.home() / Path('models/prism')
+MODELS_PATH = Path('models') / 'prism'
 
 heuristicOptions = ["--approach", "heuristicGame", "--iterationStrategy", "everyN2", "--everyN", "1000", "--performPreprocessing", "--memdpStats"]
 
