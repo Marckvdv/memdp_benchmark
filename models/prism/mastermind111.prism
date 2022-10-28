@@ -1,0 +1,23 @@
+// This file was automatically generated.
+
+mdp
+
+const int COLORS = 1;
+const int GUESSES = 1;
+const int BALLS = 1;
+const int ANSWER0; // 0<=ANSWER0<=0
+// 0<=ANSWER0<=0
+module mastermind
+	// state
+	guess : [0 .. GUESSES] init 0;
+	ball0 : [0 .. COLORS-1] init 0;
+	correct : [0 .. BALLS] init 0;
+	
+	// transitions
+	[g0] has_guesses & !all_correct -> (guess'= guess + 1) & (correct'= 0 + (0=ANSWER0 ? 1 : 0));
+	[g0] all_correct | !has_guesses -> true;
+endmodule
+
+formula has_guesses = guess < GUESSES;
+formula all_correct = correct=BALLS;
+label "target" = all_correct;

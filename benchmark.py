@@ -1,8 +1,7 @@
-#!/bin/python3
-
 import pandas as pd
 import matplotlib
 import subprocess
+from multiprocessing.pool import ThreadPool
 from typing import List, Any, Dict, Union
 import resource
 import signal
@@ -31,7 +30,7 @@ class BenchmarkCase:
         self.benchmark_options = benchmark_options
 
         self.name = f"{model_name}_{variable_ranges}_{approach_name}"
-        self.results: Dict[str, str] = {}
+        self.results = {}
 
     def timeout_handler(self, signo: int, frame) -> None:
         #print(f"benchmark {self.name} timed out.")
@@ -43,7 +42,9 @@ class BenchmarkCase:
         signal.signal(signal.SIGXCPU, self.timeout_handler)
 
     def start(self):
-        self.apply_options()
+        #self.apply_options()
+        # CPU limiting has been replaced with subprocess option
+        # MEM limiting is handled using `ulimit -Sv ...`
 
         args = [str(self.benchmark_options.paths["storm"])]
         args += ["--model", str(self.model_path)]
@@ -56,35 +57,39 @@ class BenchmarkCase:
             if process.returncode == -6:
                 print(f"benchmark case {self.name} MEM OUT")
                 self.results['Total time'] = 'MO'
-            elif process.returncode != 0:
+            elif process.returncode == 1:
                 print(f"benchmark case {self.name} return code {process.returncode}")
                 print(process.stdout)
-                self.results['Total time'] = 'fail'
-            else:
+                self.results['Total time'] = 'Incorrect answer'
+            elif process.returncode == 0:
                 stats = json.loads(process.stderr)
                 print("Got these stats: ", stats)
                 self.results = stats
+            else:
+                self.results['Total time'] = 'Unkown error'
+                print(e)
         except subprocess.TimeoutExpired as e:
             print(f"benchmark case {self.name} TIME OUT")
             self.results['Total time'] = 'TO'
         except Exception as e:
-            self.results['Total time'] = 'fail'
-            print(e)
+            self.results['Total time'] = 'Unkown error'
+            print(process.stderr.decode("utf-8").strip())
 
 class Benchmark:
-    def __init__(self, cases: List[BenchmarkCase]):
+    def __init__(self, cases: List[BenchmarkCase], parallel_threads=4):
         self.cases = cases
+        self.parallel_threads = parallel_threads
 
     def start(self) -> None:
         first_case = True
-        for case in self.cases:
-            case.start()
 
-            if first_case:
-                first_case = False
-                if case.results == {}:
-                    print("First case failed - aborting")
-                    sys.exit(1)
+        pool = ThreadPool(self.parallel_threads)
+
+        for case in self.cases:
+            pool.apply_async(lambda c: c.start(), (case,))
+
+        pool.close()
+        pool.join()
 
     def get_results(self) -> Dict[BenchmarkCase, Dict[str, Any]]:
         return {case: case.results for case in self.cases}
@@ -95,7 +100,7 @@ class DataProcessor:
 
     # Turn the raw benchmark data is something pandas can process
     def process_data(self, benchmark_data: Dict[BenchmarkCase, Dict[str, Any]]) -> Dict[str, List[Any]]:
-        data: Dict[str, List[str]] = {
+        data = {
             "Model name": [],
             "Variant": [],
             "Approach": [],
@@ -141,6 +146,14 @@ class DataProcessor:
             extended_path = base_path.with_suffix(suffix)
 
             with open(extended_path, 'w') as f:
+                #for name, data in self.data.groupby('Approach'):
+                #    to_export = export_function(data)
+                #    if to_export is None:
+                #        continue
+                #    if export_type in ['HTML']:
+                #        f.write(name)
+                #    f.write(to_export)
+
                 to_export = export_function(self.data)
                 if to_export is None:
                     continue

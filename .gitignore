@@ -2,3 +2,4 @@ results
 results2
 Pipfile.lock
 **/__pycache__
+.venv
