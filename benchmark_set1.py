@@ -22,12 +22,12 @@ approaches = [
     ("Heuristic (dfs,upper)", heuristicOptions + ["--explorationStrategy", "dfs", "--lowerUpperBound", "upper"]),
     ("Heuristic (bfs,upper)",  heuristicOptions + ["--explorationStrategy", "bfs", "--lowerUpperBound", "upper"]),
     ("Heuristic (entropy,upper)",  heuristicOptions + ["--explorationStrategy", "entropy", "--lowerUpperBound", "upper"]),
-    ("Heuristic (nentropy,upper)",  heuristicOptions +["--explorationStrategy", "nentropy", "--lowerUpperBound", "upper"]),
+    ("Heuristic (nentropy,upper)",  heuristicOptions + ["--explorationStrategy", "nentropy", "--lowerUpperBound", "upper"]),
 
     ("Heuristic (dfs,lowerupper)", heuristicOptions + ["--explorationStrategy", "dfs", "--lowerUpperBound", "lower_upper"]),
     ("Heuristic (bfs,lowerupper)",  heuristicOptions + ["--explorationStrategy", "bfs", "--lowerUpperBound", "lower_upper"]),
     ("Heuristic (entropy,lowerupper)",  heuristicOptions + ["--explorationStrategy", "entropy", "--lowerUpperBound", "lower_upper"]),
-    ("Heuristic (nentropy,lowerupper)",  heuristicOptions +["--explorationStrategy", "nentropy", "--lowerUpperBound", "lower_upper"]),
+    ("Heuristic (nentropy,lowerupper)",  heuristicOptions + ["--explorationStrategy", "nentropy", "--lowerUpperBound", "lower_upper"]),
 ]
 
 models = [

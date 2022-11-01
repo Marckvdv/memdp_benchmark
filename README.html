@@ -1,0 +1,116 @@
+<div id="content">
+<h1 id="memdp-benchmark">MEMDP Benchmark</h1>
+<p>This repository contains the models and benchmarking scripts used in
+testing the <a
+href="https://github.com/Marckvdv/storm/tree/memdp_benchmark">implementation
+of an almost-sure reachability algorithm</a>. First, we describe the
+usage of the tool itself. Then, we describe how to use the benchmark to
+reproduce the results in the accompanying paper.</p>
+<h2 id="tool-usage">Tool Usage</h2>
+<p>This section describes the usage of the tool, the
+<code>storm-multimdp</code> binary. The command line options are mostly
+separate from the usual <code>storm</code> binary.</p>
+<h3 id="flags-global">Flags (global)</h3>
+<ul>
+<li><code>--model MODEL</code>: Indicates which model to use. Only PRISM
+files are supported.</li>
+<li><code>--reach LABEL</code>: Specifies the label of target states.
+TODO currently the given value is not used and assumed to be
+<code>target</code>.</li>
+<li><code>--ranges x1&lt;=VAR1&lt;=y1,...,xn&lt;=VARn&lt;=yn</code>:
+Ranges to use to construct the MEMDP. The MEMDP is formed by
+substituting the undefined integer constants, by elements of the
+Cartesian product of ranges. The amount of MDPs constructed for these
+ranges is thus (y1-x1+1)*(y2-x2+1)*…*(yn-xn+1).</li>
+<li><code>--approach ALG</code>: Chooses which algorithm to use.
+Available options are:
+<ul>
+<li><code>completeGame</code>: Constructs complete BSG and uses Storm’s
+built-in qualitative model checking algorithms.</li>
+<li><code>iterativeGame</code>: Old design of the main (heuristic)
+algorithm. Only constructs lower bounds.</li>
+<li><code>heuristicGame</code>: Main algorithm, presented in the paper.
+Extra flags related to this algorithm are below.</li>
+<li><code>pomdpBelief</code>: First baseline algorithm. Constructs a
+POMDP based on the given MEMDP and uses Storm’s built-in quantitative
+model checking algorithms.</li>
+<li><code>pomdpSAT</code>: Second baseline algorithm. Constructs a POMDP
+based on the given MEMDP and uses Storm’s built-in SAT-based qualitative
+model checking algorithm.</li>
+</ul></li>
+</ul>
+<p>The above flags must be present to use the tool.</p>
+<h3 id="flags-heuristic-approach-only">Flags (heuristic approach
+only)</h3>
+<ul>
+<li><code>--iterationStrategy</code>: Chooses the iteration strategy to
+use. Available options are:
+<ul>
+<li><code>everyN</code>: Increase the state threshold by N after each
+iteration.</li>
+<li><code>everyN2</code>: Increase the state threshold by N*2^I after
+iteration I.</li>
+<li><code>noIteration</code>: Exploration does not stop until the whole
+game has been fully explored.</li>
+</ul></li>
+<li><code>--everyN N</code>: Sets the parameter N in the iteration
+strategies above.</li>
+<li><code>--explorationStrategy</code>: Chooses the exploration strategy
+(=heuristic) to use. Available options are:
+<ul>
+<li><code>bfs</code>: Breadth-first search.</li>
+<li><code>dfs</code>: Depth-first search.</li>
+<li><code>entropy</code>: Entropy based heuristic.</li>
+<li><code>nentropy</code>: Negative entropy based heuristic.</li>
+</ul></li>
+<li><code>--lowerUpperBound [lower|upper|lowerUpper]</code>: Specify
+whether to use the lower bound, upper bound, or both.</li>
+<li><code>--performPreprocessing</code>: Specify whether to perform
+preprocessing or not.</li>
+</ul>
+<h2 id="benchmark-usage">Benchmark Usage</h2>
+<p>The benchmark is split into two. The first part consists of MEMDPs
+that are satisfiable (i.e. there exists a winning policy). The second
+part only contains MEMDPs that are unsatisfiable and are slight
+adaptations of the models in the first part.</p>
+<p>The benchmark can be run using the following shell commands:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ulimit <span class="at">-Sv</span> 32000000</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python3 benchmark_set1.py <span class="at">--threads</span> 6 <span class="at">--timelimit</span> 900</span></code></pre></div>
+<p>Which runs the first benchmark with a memory limit of 32Gb (per
+thread) using 6 threads with a timelimit of 15 minutes. Due to the
+relatively long time required to perform the benchmark, it is
+recommended to use a tool like <code>screen</code> or <code>tmux</code>.
+The second part of the benchmark can be performed by running
+<code>benchmark_set2.py</code> instead. The results are stored in the
+<code>results</code> and <code>results2</code> folders for the first and
+second part respectively.</p>
+<p>Once the benchmark has finished, we can process some of the
+results.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python3 grapher.py</span></code></pre></div>
+<p>And input the number associated with results you want to process.</p>
+</div>
+<style type="text/css" rel="stylesheet">
+body {
+    margin-left: 33%;
+    margin-right: 33%;
+    
+    font-family: sans-serif;
+}
+
+h1, h2, h3 {
+    border-bottom: 1px solid black;
+}
+
+#content {
+    background-color: #ccc;
+    padding-left: 1cm;
+    padding-right: 1cm;
+    padding-bottom: 0.5cm;
+    overflow: auto;
+}
+
+.sourceCode {
+    background-color: #000;
+    color: #fff;
+}
+</style>
